@@ -9,7 +9,7 @@ angular.module('sparkle.controllers',[])
     
 }])
 
-.controller('SparkleCtrl',['$state','$scope','$cordovaSocialSharing',function($state,$scope,$cordovaSocialSharing){
+.controller('SparkleCtrl',['$state','$scope','$ionicActionSheet','$cordovaSocialSharing',function($state,$scope,$ionicActionSheet,$cordovaSocialSharing){
     
     $scope.events = function(){
         $state.go('app.home');
@@ -31,7 +31,7 @@ angular.module('sparkle.controllers',[])
     $scope.share = function(){
         //$state.go('app.search');
         console.log('Share App');
-        /*$ionicActionSheet.show({
+        $ionicActionSheet.show({
       titleText: 'Share App With Friends',
       buttons: [
         { text: '<i class="icon ion-social-whatsapp"></i> Whatsapp' },
@@ -44,16 +44,18 @@ angular.module('sparkle.controllers',[])
         console.log('CANCELLED');
       },
       buttonClicked: function(index) {
-        console.log('BUTTON CLICKED', index);
+        //console.log('BUTTON CLICKED', index);
+        $cordovaSocialSharing
+            .shareViaEmail('Some message', 'Some Subject', 'to_address@gmail.com');
         return true;
       },
       destructiveButtonClicked: function() {
         console.log('DESTRUCT');
         return true;
       }
-    });*/
+    });
         
-        $cordovaSocialSharing.share("Message","Message",null,"MessageSS");
+        //$cordovaSocialSharing.share("Message","Message",null,"MessageSS");
     };
 }])
 
