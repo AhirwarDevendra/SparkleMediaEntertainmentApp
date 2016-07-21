@@ -9,7 +9,7 @@ angular.module('sparkle.controllers',[])
     
 }])
 
-.controller('SparkleCtrl',['$state','$scope',function($state,$scope){
+.controller('SparkleCtrl',['$state','$scope','$cordovaSocialSharing',function($state,$scope,$cordovaSocialSharing){
     
     $scope.events = function(){
         $state.go('app.home');
