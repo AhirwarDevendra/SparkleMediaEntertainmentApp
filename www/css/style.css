@@ -1,0 +1,37 @@
+/* Empty. Add your own CSS if you like */
+/* Splash Screen Page Styling */
+ion-view.app-splash
+{
+    background-color:#FF007F;
+}
+
+div.app-splash
+{
+    text-align:center;
+    margin:130px 20px;
+    color:#FFF;
+}
+
+h3.app-splash
+{
+    margin:20px 0px; 
+    color:#FFF;
+}
+
+img.app-splash
+{
+    margin:10px 0px; 
+    width:35%; 
+    height:35%;    
+}
+
+p.app-splash
+{
+    margin:35px 0px;
+    font-size:20px; 
+}
+
+
+
+/* Menu Option Styling */
+
