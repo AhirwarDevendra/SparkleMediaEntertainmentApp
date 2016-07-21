@@ -35,6 +35,7 @@
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
+    
      <platform name="android">
       <allow-intent href="market:*" />
   </platform>

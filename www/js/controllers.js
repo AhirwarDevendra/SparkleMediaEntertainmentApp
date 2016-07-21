@@ -9,7 +9,14 @@ angular.module('sparkle.controllers',[])
     
 }])
 
-.controller('SparkleCtrl',['$state','$scope','$ionicActionSheet','$cordovaSocialSharing',function($state,$scope,$ionicActionSheet,$cordovaSocialSharing){
+.controller('SparkleCtrl',['$ionicHistory','$state','$scope','$ionicActionSheet',function($ionicHistory,$state,$scope,$ionicActionSheet){
+    
+    $ionicHistory.nextViewOptions({
+        historyRoot: true,
+        disableAnimate: true,
+         expire: 300
+    });
+    
     
     $scope.events = function(){
         $state.go('app.home');
@@ -34,7 +41,7 @@ angular.module('sparkle.controllers',[])
         $ionicActionSheet.show({
       titleText: 'Share App With Friends',
       buttons: [
-        { text: '<i class="icon ion-social-whatsapp"></i> Whatsapp' },
+        { text: '<i class="icon ion-social-whatsapp" ></i> Whatsapp' },
         { text: '<i class="icon ion-social-googleplus"></i> Gmail' },
         { text: '<i class="icon ion-email"></i> Message' },
         { text: '<i class="icon ion-social-facebook"></i> Facebook' },
@@ -44,9 +51,7 @@ angular.module('sparkle.controllers',[])
         console.log('CANCELLED');
       },
       buttonClicked: function(index) {
-        //console.log('BUTTON CLICKED', index);
-        $cordovaSocialSharing
-            .shareViaEmail('Some message', 'Some Subject', 'to_address@gmail.com');
+        console.log('BUTTON CLICKED', index);
         return true;
       },
       destructiveButtonClicked: function() {
@@ -59,7 +64,31 @@ angular.module('sparkle.controllers',[])
     };
 }])
 
-.controller('HomeCtrl',['$state','$scope',function($state,$scope){
+.controller('HomeCtrl',['$state','$scope','$ionicLoading','$ionicPopup','EventService',function($state,$scope,$ionicLoading,$ionicPopup,EventService){
     
     console.log("Inside Home");
+    
+    $scope.requestEvent = function(){
+        $state.go('app.requestEvent');
+        console.log('Event Form');
+    };
+    
+    /*
+        Ionic Loader 
+        It Loads Until EventService Return Result
+    */
+    $ionicLoading.show({
+        template: '<img src="img/sparkleLoad.gif"><br>Loading Awesomeness',
+        showBackdrop: true
+    });
+    
+    
+    
+    EventService.all().then(function(result){
+        $scope.events = result.data;
+        console.log($scope.events);
+        $ionicLoading.hide();
+    });
+    
 }])
+
